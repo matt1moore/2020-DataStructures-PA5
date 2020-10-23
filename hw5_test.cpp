@@ -282,7 +282,327 @@ TEST(BasicBinSearchCollectionTest, SimpleSort) {
   }
 }
 
+// ~~~~~~~~~~ ADDITIONAL TEST 1(a) ADDTOFRONT ~~~~~~~~~~
+TEST(BasicArrayCollectionTest, AddToFront) {
+  ArrayListCollection<char,int> c;
+  char z = 'z';
+  int i = 0;
+  for (int j = 0; j < 15; ++j) {
+	c.add(z,i);
+	--z;
+	++i;
+  }
+  
+  ArrayList<char> s1;
+  
+  ASSERT_EQ(15,c.size());
+  
+  char k1;
+  char k2;
+  
+  c.sort(s1);
+  
+  for (int j = 1; j < s1.size(); ++j) {
+	ASSERT_EQ(true,s1.get(j - 1,k1));
+	ASSERT_EQ(true,s1.get(j,k2));
+    ASSERT_LT(k1,k2);
+  }
+}
 
+// ~~~~~~~~~~ ADDITIONAL TEST 1(b) ADDTOFRONT ~~~~~~~~~~
+TEST(BinSearchCollection,AddToFront) {
+  BinSearchCollection<char,int> c;
+  char z = 'z';
+  int i = 0;
+  for (int j = 0; j < 15; ++j) {
+	c.add(z,i);
+	--z;
+	++i;
+  }
+  
+  ArrayList<char> s1;
+  
+  ASSERT_EQ(15,c.size());
+  
+  char k1;
+  char k2;
+  c.keys(s1);
+  for (int j = 1; j < s1.size(); ++j) {
+	ASSERT_EQ(true,s1.get(j - 1,k1));
+	ASSERT_EQ(true,s1.get(j,k2));
+    ASSERT_LT(k1, k2);
+  }
+}
+
+// ~~~~~~~~~~ ADDITIONAL TEST 2(a) ADDTOEND ~~~~~~~~~~
+TEST(ArrayListCollection,AddToEnd) {
+  ArrayListCollection<string,int> c;
+  
+  c.add("a",10);
+  c.add("b",20);
+  c.add("c",30);
+  c.add("d",40);
+  c.add("e",50);
+  c.add("f",60);
+  c.add("g",70);
+  
+  ArrayList<string> s1;
+  
+  ASSERT_EQ(7,c.size());
+  
+  string k1;
+  string k2;
+  
+  c.sort(s1);
+  
+  for (int j = 1; j < s1.size(); ++j) {
+	ASSERT_EQ(true,s1.get(j - 1,k1));
+	ASSERT_EQ(true,s1.get(j,k2));
+    ASSERT_LT(k1,k2);
+  }
+}
+
+// ~~~~~~~~~~ ADDITIONAL TEST 2(b) ADDTOEND ~~~~~~~~~~
+TEST(BinSearchCollection,AddToEnd) {
+  BinSearchCollection<string,int> c;
+  
+  c.add("a",10);
+  c.add("b",20);
+  c.add("c",30);
+  c.add("d",40);
+  c.add("e",50);
+  c.add("f",60);
+  c.add("g",70);
+  
+  ArrayList<string> s1;
+  
+  ASSERT_EQ(7,c.size());
+  
+  string k1;
+  string k2;
+  
+  c.sort(s1);
+  
+  for (int j = 1; j < s1.size(); ++j) {
+	ASSERT_EQ(true,s1.get(j - 1,k1));
+	ASSERT_EQ(true,s1.get(j,k2));
+    ASSERT_LT(k1,k2);
+  }
+}
+ 
+// ~~~~~~~~~~ ADDITIONAL TEST 3(a) ADDTOMID ~~~~~~~~~~
+TEST(ArrayListCollection,AddToMid) {
+  ArrayListCollection<string,int> c;
+  
+  c.add("a",10);
+  c.add("z",20);
+  c.add("b",30);
+  c.add("y",40);
+  c.add("c",50);
+  c.add("x",60);
+  c.add("d",70);
+  c.add("w",80);
+  
+  ArrayList<string> s1;
+  
+  ASSERT_EQ(8,c.size());
+  
+  string k1;
+  string k2;
+  
+  
+  for (int j = 1; j < s1.size(); ++j) {
+	ASSERT_EQ(true,s1.get(j - 1,k1));
+	ASSERT_EQ(true,s1.get(j,k2));
+    ASSERT_LT(k1,k2);
+  }
+}
+
+// ~~~~~~~~~~ ADDITIONAL TEST 3(b) ADDTOMID ~~~~~~~~~~
+TEST(BinSearchCollection,AddToMid) {
+  BinSearchCollection<string,int> c;
+  
+  c.add("a",10);
+  c.add("z",20);
+  c.add("b",30);
+  c.add("y",40);
+  c.add("c",50);
+  c.add("x",60);
+  c.add("d",70);
+  c.add("w",80);
+  
+  ArrayList<string> s1;
+  
+  ASSERT_EQ(8,c.size());
+  
+  string k1;
+  string k2;
+  
+  c.sort(s1);
+  
+  for (int j = 1; j < s1.size(); ++j) {
+	ASSERT_EQ(true,s1.get(j - 1,k1));
+	ASSERT_EQ(true,s1.get(j,k2));
+    ASSERT_LT(k1,k2);
+  }
+}
+
+// ~~~~~~~~~~ ADDITIONAL TEST 4(a) REMOVEFRONT ~~~~~~~~~~
+TEST(ArrayListCollection,RemoveFront) {
+  ArrayListCollection<string,int> c;
+  
+  c.add("a",10);
+  c.add("b",20);
+  c.add("c",30);
+  c.add("d",40);
+  c.add("e",50);
+  c.add("f",60);
+  c.add("g",70);
+  c.add("h",80);
+  c.add("i",90);
+  
+  ArrayList<string> s1;
+  
+  c.sort(s1);
+  
+  ASSERT_EQ(9,c.size());
+  
+  c.remove("a");
+  c.remove("b");
+  c.remove("c");
+  c.remove("d");
+  c.remove("e");
+  c.remove("f");
+  
+  ASSERT_EQ(3,c.size());
+  
+  string k1;
+  string k2;
+  
+  for (int j = 1; j < s1.size(); ++j) {
+	ASSERT_EQ(true,s1.get(j - 1,k1));
+	ASSERT_EQ(true,s1.get(j,k2));
+    ASSERT_LT(k1,k2);
+  }
+}
+// ~~~~~~~~~~ ADDITIONAL TEST 4(b) REMOVEFRONT ~~~~~~~~~~
+TEST(BinSearchCollection,RemoveFront) {
+  BinSearchCollection<string,int> c;
+  
+  c.add("a",10);
+  c.add("b",20);
+  c.add("c",30);
+  c.add("d",40);
+  c.add("e",50);
+  c.add("f",60);
+  c.add("g",70);
+  c.add("h",80);
+  c.add("i",90);
+  
+  ArrayList<string> s1;
+  
+  c.sort(s1);
+  
+  ASSERT_EQ(9,c.size());
+  
+  c.remove("a");
+  c.remove("b");
+  c.remove("c");
+  c.remove("d");
+  c.remove("e");
+  c.remove("f");
+  
+  ASSERT_EQ(3,c.size());
+  
+  string k1;
+  string k2;
+  
+  for (int j = 1; j < s1.size(); ++j) {
+	ASSERT_EQ(true,s1.get(j - 1,k1));
+	ASSERT_EQ(true,s1.get(j,k2));
+    ASSERT_LT(k1,k2);
+  }
+}
+
+// ~~~~~~~~~~ ADDITIONAL TEST 5(a) REMOVEMID ~~~~~~~~~~
+TEST(ArrayListCollection,RemoveMid) {
+  ArrayListCollection<string,int> c;
+  
+  c.add("a",10);
+  c.add("b",20);
+  c.add("c",30);
+  c.add("d",40);
+  c.add("e",50);
+  c.add("f",60);
+  c.add("g",70);
+  c.add("h",80);
+  c.add("i",90);
+  
+  ArrayList<string> s1;
+  
+  c.sort(s1);
+  
+  ASSERT_EQ(9,c.size());
+  
+  // Removing most middle elements
+  c.remove("e");
+  c.remove("d");
+  c.remove("f");
+  c.remove("g");
+  c.remove("c");
+  c.remove("h");
+  
+  ASSERT_EQ(3,c.size());
+  
+  string k1;
+  string k2;
+  
+  for (int j = 1; j < s1.size(); ++j) {
+	ASSERT_EQ(true,s1.get(j - 1,k1));
+	ASSERT_EQ(true,s1.get(j,k2));
+    ASSERT_LT(k1,k2);
+  }
+}
+
+// ~~~~~~~~~~ ADDITIONAL TEST 5(b) REMOVEMID ~~~~~~~~~~
+TEST(BinSearchCollection,RemoveMid) {
+  BinSearchCollection<string,int> c;
+  
+  c.add("a",10);
+  c.add("b",20);
+  c.add("c",30);
+  c.add("d",40);
+  c.add("e",50);
+  c.add("f",60);
+  c.add("g",70);
+  c.add("h",80);
+  c.add("i",90);
+  
+  ArrayList<string> s1;
+  
+  c.sort(s1);
+  
+  ASSERT_EQ(9,c.size());
+  
+  // Removing most middle elements
+  c.remove("e");
+  c.remove("d");
+  c.remove("f");
+  c.remove("g");
+  c.remove("c");
+  c.remove("h");
+  
+  ASSERT_EQ(3,c.size());
+  
+  string k1;
+  string k2;
+  
+  for (int j = 1; j < s1.size(); ++j) {
+	ASSERT_EQ(true,s1.get(j - 1,k1));
+	ASSERT_EQ(true,s1.get(j,k2));
+    ASSERT_LT(k1,k2);
+  }
+}
 // TODO: Add at least 10 non-trival tests below. Be sure for each test
 // to provide comments describing the detailed purpose of each the
 // test.
