@@ -2,6 +2,7 @@
 // NAME: S. Bowers
 // FILE: hw5_perf.cpp
 // DATE: Fall 2020
+
 // DESC: Performs basic performance tests over the resizable array
 // collection implementation and the sorted resizable array collection
 // implementation (via binary search). Operations tested are
@@ -214,7 +215,7 @@ double add(pair<int,string> array[], int size, int type)
     collection = new BinSearchCollection<int,string>;
   for (int i = 0; i < size; ++i)
     collection->add(array[i].first, array[i].second);
-  assert(collection.size() == size);
+  assert(collection->size() == size);
   for (int i = 0; i < ITERATIONS; ++i) {
     auto start = high_resolution_clock::now();
     collection->add(size/2 + 5, "aa");
@@ -236,7 +237,7 @@ double remove(pair<int,string> array[], int size, int type)
     collection = new BinSearchCollection<int,string>;
   for (int i = 0; i < size; ++i)
     collection->add(array[i].first, array[i].second);
-  assert(collection.size() == size);
+  assert(collection->size() == size);
   for (int i = 0; i < ITERATIONS; ++i) {
     auto start = high_resolution_clock::now();
     collection->remove(size/2);
@@ -258,7 +259,7 @@ double find_value(pair<int,string> array[], int size, int type)
     collection = new BinSearchCollection<int,string>;
   for (int i = 0; i < size; ++i)
     collection->add(array[i].first, array[i].second);
-  assert(collection.size() == size);
+  assert(collection->size() == size);
   for (int i = 0; i < ITERATIONS; ++i) {
     auto start = high_resolution_clock::now();
     string val;
@@ -280,7 +281,7 @@ double find_range(pair<int,string> array[], int size, int type)
     collection = new BinSearchCollection<int,string>;
   for (int i = 0; i < size; ++i)
     collection->add(array[i].first, array[i].second);
-  assert(collection.size() == size);
+  assert(collection->size() == size);
   for (int i = 0; i < ITERATIONS; ++i) {
     int k1 = (size/2) - (size/10);
     int k2 = (size/2) + (size/10);
@@ -304,18 +305,20 @@ double sort(pair<int,string> array[], int size, int type)
     collection = new BinSearchCollection<int,string>;
   for (int i = 0; i < size; ++i)
     collection->add(array[i].first, array[i].second);
-  assert(collection.size() == size);
+  assert(collection->size() == size);
   for (int i = 0; i < ITERATIONS; ++i) {
     ArrayList<int> keys;
     auto start = high_resolution_clock::now();
     collection->sort(keys);
     auto end = high_resolution_clock::now();
-    for (int i = 0; i < keys.size() -1; ++i) {
-      int val1 = 0, val2 = 0;
-      keys.get(i, val1);
-      keys.get(i + 1, val2);
-      assert(val1 < val2);
-    }
+    if (size > 0)
+      for (int i = 0; i < keys.size()-1; ++i) {
+        int val1 = 0, val2 = 0;
+        keys.get(i, val1);
+        keys.get(i + 1, val2);
+        cout << "type = " << type << ", val1 = " << val1 << ", val2 = " << val2 << endl;
+        assert(val1 < val2);
+      }
     times[i] = duration_cast<microseconds>(end - start).count();
   }
   delete collection;
