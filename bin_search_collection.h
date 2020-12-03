@@ -5,7 +5,6 @@
 #include "array_list.h"
 #include "array_list_collection.h"
 #include "collection.h"
-#include "linked_list.h" 
 
 
 template<typename K, typename V>
